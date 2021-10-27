@@ -1,0 +1,64 @@
+{
+  "name": "nshapesetsrn",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint .",
+    "generate": "plop --plopfile generators/index.js",
+    "nuke": "rm -rf node_modules && yarn && cd ios && pod install && cd ..",
+    "prestorybook": "rnstl"
+  },
+  "dependencies": {
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
+    "react": "17.0.2",
+    "react-native": "0.66.1",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.8.0",
+    "use-timer": "^2.0.1",
+    "zustand": "^3.6.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "@storybook/addon-actions": "^5.3",
+    "@storybook/addon-knobs": "^6.3.1",
+    "@storybook/addon-links": "^5.3",
+    "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@storybook/addon-ondevice-knobs": "^5.3.25",
+    "@storybook/react-native": "^5.3.25",
+    "@types/jest": "^27.0.2",
+    "@types/react": "^17.0.33",
+    "@types/react-native": "^0.66.1",
+    "@types/react-test-renderer": "^17.0.1",
+    "babel-jest": "^26.6.3",
+    "babel-loader": "^8.2.3",
+    "eslint": "7.14.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "plop": "^2.7.6",
+    "react-dom": "17.0.2",
+    "react-native-storybook-loader": "^2.0.4",
+    "react-test-renderer": "17.0.2",
+    "typescript": "^4.4.4"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": [
+        "./src/components",
+        "./src/screens"
+      ],
+      "pattern": "**/*.stories.tsx",
+      "outputFile": "./storybook/storyLoader.js"
+    }
+  }
+}

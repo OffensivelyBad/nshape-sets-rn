@@ -1,0 +1,11 @@
+import React from "react";
+import { text, withKnobs } from "@storybook/addon-knobs";
+import { storiesOf } from "@storybook/react-native";
+import {{ properCase name}}Layout from "./{{ dashCase name}}.layout";
+
+storiesOf("UI", module)
+.addDecorator(withKnobs)
+.add("{{ titleCase name}}", () => {
+const sample = text("Test Label", "default");
+return <{{ properCase name}}Layout />;
+});
