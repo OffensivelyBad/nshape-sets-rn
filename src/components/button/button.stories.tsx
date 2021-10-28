@@ -1,11 +1,13 @@
 import React from "react";
 import { text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react-native";
-import ButtonLayout from "./button.layout";
+import Button from "./button";
 
 storiesOf("UI", module)
   .addDecorator(withKnobs)
   .add("Button", () => {
-    const sample = text("Test Label", "");
-    return <ButtonLayout />;
+    return <Button
+      image={require("../../assets/Title-Rest.png")}
+      onPress={() => { }}
+    />;
   });

@@ -5,15 +5,16 @@
 */
 
 import * as React from "react";
+import Base from "../../components/base";
 import MainLayout from "./main.layout";
 
 type Props = {};
 
-const UI_TESTING = true;
-
-const MainLogic = (props: Props) => {
+const MainLogic = (_props: Props) => {
   return (
-    <MainLayout />
+    <Base>
+      <MainLayout />
+    </Base>
   );
 };
 

@@ -10,7 +10,7 @@
 
 [ ] add zustand models
 
-[ ] add workout model
+[x] add workout model
 
 [x] add navigation (https://reactnavigation.org/docs/hello-react-navigation)
 

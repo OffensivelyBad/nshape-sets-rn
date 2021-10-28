@@ -1,3 +1,3 @@
-import Button from "./button.logic";
+import Button from "./button";
 
 export default Button;

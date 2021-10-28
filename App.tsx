@@ -6,10 +6,9 @@
  * @flow strict-local
  */
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Pressable,
-  SafeAreaView,
   StatusBar,
   StyleSheet,
   useColorScheme,
@@ -21,17 +20,23 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Storybook from './storybook'
-import LinearGradient from 'react-native-linear-gradient';
 import Main from './src/screens/main';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useColorStore } from './src/stores';
+import { DarkColor, LightColor } from './src/theme';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const { setColors } = useColorStore();
   const [storybook, setStorybook] = useState(false);
+
+  useEffect(() => {
+    setColors(isDarkMode ? DarkColor : LightColor);
+  }, [isDarkMode, setColors]);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -43,21 +48,24 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <SafeAreaView style={[styles.container, backgroundStyle]}>
+      <View style={[styles.container, backgroundStyle]}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <LinearGradient colors={['red', 'green', 'blue']} style={{ width: '100%', height: '120%', position: 'absolute' }}>
-          <View style={styles.container}>
-            {storybook ?
-              <Storybook /> :
-              <Stack.Navigator>
+        <View style={styles.container}>
+          {storybook ?
+            <Storybook /> :
+            <>
+              <Stack.Navigator
+                screenOptions={{
+                  headerShown: false
+                }}
+              >
                 <Stack.Screen name="Main" component={Main} />
               </Stack.Navigator>
-            }
-            <Pressable onPress={toggleStorybook} style={styles.hiddenButton} />
-            {/* <LinearGradient colors={['red', 'green', 'blue']} style={{ width: 200, height: 200, position: 'absolute' }}></LinearGradient> */}
-          </View>
-        </LinearGradient>
-      </SafeAreaView>
+            </>
+          }
+          <Pressable onPress={toggleStorybook} style={styles.hiddenButton} />
+        </View>
+      </View>
     </NavigationContainer>
   );
 };
@@ -68,10 +76,11 @@ const styles = StyleSheet.create({
   },
   hiddenButton: {
     position: 'absolute',
-    top: 0,
+    top: 50,
     end: 0,
     height: 30,
     width: 30,
+    backgroundColor: 'blue'
   }
 });
 

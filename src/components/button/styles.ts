@@ -4,8 +4,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  header: {
-    textAlign: "center",
+  image: {
+    width: '100%',
+    height: 75,
   }
 });
 

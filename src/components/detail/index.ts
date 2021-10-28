@@ -1,3 +1,3 @@
-import Detail from "./detail.logic";
+import Detail from "./detail";
 
 export default Detail;
