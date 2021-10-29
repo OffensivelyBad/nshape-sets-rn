@@ -1,11 +1,11 @@
 import React from "react";
-import { text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react-native";
-import SliderInputLayout from "./slider-input.layout";
+import SliderInput from "./slider-input";
 
 storiesOf("UI", module)
-.addDecorator(withKnobs)
-.add("Slider Input", () => {
-const sample = text("Test Label", "default");
-return <SliderInputLayout />;
-});
+  .add("Slider Input", () => {
+    return <SliderInput
+      initialValue={50}
+      image={require('../../assets/Title-Sets.png')}
+    />;
+  });

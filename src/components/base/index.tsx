@@ -16,7 +16,7 @@ const Base = ({ children }: Props) => {
   const { colors } = useColorStore();
 
   return (
-    <LinearGradient colors={[colors.backgroundTop, colors.backgroundBottom]} style={{ width: '100%', height: '120%', position: 'absolute' }}>
+    <LinearGradient colors={[colors.backgroundTop, colors.backgroundBottom]} style={{ width: '100%', height: '100%', position: 'absolute' }}>
       {children}
     </LinearGradient>
   );

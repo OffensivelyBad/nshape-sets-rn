@@ -1,3 +1,3 @@
-import SliderInput from "./slider-input.logic";
+import SliderInput from "./slider-input";
 
 export default SliderInput;

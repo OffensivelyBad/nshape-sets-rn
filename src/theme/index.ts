@@ -4,24 +4,27 @@ export type ColorTheme = {
   backgroundTop: string;
   backgroundBottom: string;
   text: string;
+  inputText: string;
   primary: string;
   secondary: string;
 };
 
 export const LightColor: ColorTheme = {
-  backgroundTop: 'white',
-  backgroundBottom: 'black',
+  backgroundTop: '#E53655',
+  backgroundBottom: '#413AA0',
   text: 'black',
-  primary: 'red',
-  secondary: 'blue'
+  inputText: 'white',
+  primary: '#E53655',
+  secondary: '#413AA0'
 };
 
 export const DarkColor: ColorTheme = {
-  backgroundTop: 'black',
-  backgroundBottom: 'white',
+  backgroundTop: '#413AA0',
+  backgroundBottom: '#000',
   text: 'white',
-  primary: 'red',
-  secondary: 'blue'
+  inputText: 'white',
+  primary: '#413AA0',
+  secondary: '#E53655'
 };
 
 export const useColors = () => {

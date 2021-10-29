@@ -34,9 +34,9 @@
 
 [ ] add alert
 
-[ ] add slider
+[x] add slider
 
-[ ] add sliderinput component
+[x] add sliderinput component
 
 [ ] add button component
 
@@ -44,4 +44,4 @@
 
 [ ] add timer component
 
-[ ] 
+[ ] add aliasing for paths

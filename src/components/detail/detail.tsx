@@ -11,7 +11,7 @@ import styles from "./styles";
 
 type Props = {
   image: any;
-  value: string | number;
+  value?: string | number;
 };
 
 const Detail = ({ image, value }: Props) => {
@@ -20,7 +20,9 @@ const Detail = ({ image, value }: Props) => {
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={image} resizeMode="contain" />
-      <Text style={[styles.text, { color: colors.text }]}>{value}</Text>
+      {value ?
+        <Text style={[styles.text, { color: colors.text }]}>{value}</Text>
+        : null}
     </View>
   );
 };

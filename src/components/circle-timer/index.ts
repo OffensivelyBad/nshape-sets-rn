@@ -1,3 +1,3 @@
-import CircleTimer from "./circle-timer.logic";
+import CircleTimer from "./circle-timer";
 
 export default CircleTimer;

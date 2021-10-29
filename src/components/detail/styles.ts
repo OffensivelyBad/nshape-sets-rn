@@ -3,15 +3,16 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
   },
   text: {
-    fontSize: 48
+    fontSize: 36,
+    padding: 10
   },
   image: {
-    height: 75
+    maxWidth: '60%',
+    height: 40
   }
 });
 

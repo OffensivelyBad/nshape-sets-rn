@@ -7,7 +7,7 @@ storiesOf("UI", module)
   .addDecorator(withKnobs)
   .add("Detail", () => {
     return <Detail
-      image={require('../../assets/Title-Sets.png')}
+      image={require('../../assets/Title-RemainingSets.png')}
       value={23}
     />;
   });
