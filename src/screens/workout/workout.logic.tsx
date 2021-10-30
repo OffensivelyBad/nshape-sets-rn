@@ -36,20 +36,37 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
     setCurrentSet(set => set + 1);
   }, []);
 
+  const onBackPressed = useCallback(() => {
+    const doneButton: AlertButton = {
+      text: "Done!",
+      onPress: () => navigation.goBack(),
+      style: "destructive"
+    }
+    const continueButton: AlertButton = {
+      text: "Keep going!",
+      style: "default"
+    }
+    Alert.alert("Are you done?", undefined, [doneButton, continueButton]);
+  }, [navigation]);
+
+  const onWorkoutEnd = useCallback(() => {
+    pause();
+    const formattedTime = getElapsedTime(time);
+    const button: AlertButton = {
+      text: "Done!",
+      onPress: () => navigation.goBack()
+    }
+    Alert.alert("Done!", `You completed all sets in ${formattedTime}.`, [button]);
+  }, [navigation, pause, time]);
+
   const onSetEnd = useCallback(() => {
     if (currentSet >= sets) {
       // Workout is over
-      pause();
-      const formattedTime = getElapsedTime(time);
-      const button: AlertButton = {
-        text: "Done!",
-        onPress: () => navigation.goBack()
-      }
-      Alert.alert("Done!", `You completed all sets in ${formattedTime}.`, [button]);
+      onWorkoutEnd();
     } else {
       setResting(true);
     }
-  }, [currentSet, navigation, pause, sets, time]);
+  }, [currentSet, onWorkoutEnd, sets]);
 
   return <WorkoutLayout
     currentSet={currentSet}
@@ -60,6 +77,7 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
     resting={resting}
     onRestEnd={onRestEnd}
     onSetEnd={onSetEnd}
+    onBackPressed={onBackPressed}
   />
 };
 

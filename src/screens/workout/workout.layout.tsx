@@ -4,8 +4,10 @@
  *
  */
 
+import { faChevronCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React from "react";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import Base from "../../components/base";
 import Logo from "../../components/logo";
 import { useColorStore } from "../../stores";
@@ -22,6 +24,7 @@ type Props = {
   resting: boolean;
   onRestEnd: () => void;
   onSetEnd: () => void;
+  onBackPressed: () => void;
 };
 
 const WorkoutLayout = ({
@@ -32,7 +35,8 @@ const WorkoutLayout = ({
   restSeconds,
   resting,
   onRestEnd,
-  onSetEnd
+  onSetEnd,
+  onBackPressed
 }: Props) => {
   const { colors } = useColorStore();
 
@@ -53,6 +57,13 @@ const WorkoutLayout = ({
             onSetEnd={onSetEnd}
           />
         }
+        <Pressable style={styles.backButton} onPress={onBackPressed}>
+          <FontAwesomeIcon
+            icon={faChevronCircleLeft}
+            size={28}
+            color={colors.text}
+          />
+        </Pressable>
       </View>
     </Base>
   );

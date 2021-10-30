@@ -7,6 +7,11 @@ const styles = StyleSheet.create({
   },
   time: {
     alignSelf: "center",
+  },
+  backButton: {
+    position: "absolute",
+    top: 50,
+    left: 20
   }
 });
 
