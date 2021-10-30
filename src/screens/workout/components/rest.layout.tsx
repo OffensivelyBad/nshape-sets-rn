@@ -4,7 +4,7 @@
  *
  */
 
-import React from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { View } from "react-native";
 import Button from "../../../components/button";
 import CircleTimer from "../../../components/circle-timer";
@@ -22,6 +22,15 @@ const Rest = ({
   nextSetDescription,
   onRestEnd
 }: Props) => {
+  const ended = useRef(false);
+
+  const endRest = useCallback(() => {
+    if (!ended.current) {
+      ended.current = true;
+      onRestEnd();
+    }
+  }, [ended, onRestEnd]);
+
   return (
     <View style={styles.container}>
       <Detail
@@ -30,7 +39,7 @@ const Rest = ({
       <CircleTimer
         timeInSeconds={restSeconds}
         startCountdown
-        onCountdownComplete={onRestEnd}
+        onCountdownComplete={endRest}
       />
       <Detail
         image={require('../../../assets/Title-NextSet.png')}
@@ -38,7 +47,7 @@ const Rest = ({
       />
       <Button
         image={require('../../../assets/Button-Skip.png')}
-        onPress={onRestEnd}
+        onPress={endRest}
       />
     </View>
   );

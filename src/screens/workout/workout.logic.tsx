@@ -5,17 +5,25 @@
 */
 
 import React, { useCallback, useEffect, useState } from "react";
+import { StackNavigationProp } from '@react-navigation/stack';
 import { useTimer } from "use-timer";
-import { Workout } from "../../models";
+import { NavigationPropList, NavigationScreens, Workout } from "../../models";
 import { getElapsedTime, getNextSetDescription, getRemainingSetsDescription } from "./util";
 import WorkoutLayout from "./workout.layout";
+import { WorkoutProps } from ".";
+import { Alert, AlertButton } from "react-native";
+import { useNavigation } from "@react-navigation/core";
+
+type WorkoutNavigationProps = StackNavigationProp<NavigationPropList, NavigationScreens.Workout>;
 
 type Props = {
-  workout: Workout
+  route: { params: WorkoutProps };
+  navigation: WorkoutNavigationProps;
 };
 
-const WorkoutLogic = ({ workout: { sets, rest } }: Props) => {
-  const { start, time } = useTimer();
+const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props) => {
+  const navigation = useNavigation();
+  const { start, pause, time } = useTimer();
   const [currentSet, setCurrentSet] = useState(1);
   const [resting, setResting] = useState(false);
 
@@ -29,8 +37,19 @@ const WorkoutLogic = ({ workout: { sets, rest } }: Props) => {
   }, []);
 
   const onSetEnd = useCallback(() => {
-    setResting(true);
-  }, []);
+    if (currentSet >= sets) {
+      // Workout is over
+      pause();
+      const formattedTime = getElapsedTime(time);
+      const button: AlertButton = {
+        text: "Done!",
+        onPress: () => navigation.goBack()
+      }
+      Alert.alert("Done!", `You completed all sets in ${formattedTime}.`, [button]);
+    } else {
+      setResting(true);
+    }
+  }, [currentSet, navigation, pause, sets, time]);
 
   return <WorkoutLayout
     currentSet={currentSet}

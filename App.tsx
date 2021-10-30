@@ -26,8 +26,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useColorStore } from './src/stores';
 import { DarkColor, LightColor } from './src/theme';
+import Workout from './src/screens/workout';
+import { NavigationPropList, NavigationScreens } from './src/models';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<NavigationPropList>();
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -53,15 +55,14 @@ const App = () => {
         <View style={styles.container}>
           {storybook ?
             <Storybook /> :
-            <>
-              <Stack.Navigator
-                screenOptions={{
-                  headerShown: false
-                }}
-              >
-                <Stack.Screen name="Main" component={Main} />
-              </Stack.Navigator>
-            </>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false
+              }}
+            >
+              <Stack.Screen name={NavigationScreens.Main} component={Main} />
+              <Stack.Screen name={NavigationScreens.Workout} component={Workout} />
+            </Stack.Navigator>
           }
           <Pressable onPress={toggleStorybook} style={styles.hiddenButton} />
         </View>

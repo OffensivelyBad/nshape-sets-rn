@@ -19,12 +19,9 @@ type Props = {
 const CircleTimer = ({ timeInSeconds, startCountdown = true, onCountdownComplete }: Props) => {
   const { colors } = useColorStore();
   const circleRef = useRef<AnimatedCircularProgress>();
-  const [fill, setFill] = useState(100);
+  const [fillCounter, setFillCounter] = useState(0);
 
   useEffect(() => {
-    const newFill = startCountdown ? 100 : 0;
-    setFill(newFill);
-
     if (startCountdown) {
       setTimeout(() => {
         const toValue = startCountdown ? 0 : 100;
@@ -41,17 +38,28 @@ const CircleTimer = ({ timeInSeconds, startCountdown = true, onCountdownComplete
     onCountdownComplete ? onCountdownComplete() : null;
   }, [onCountdownComplete]);
 
+  const onAnimationDone = useCallback(() => {
+    // The animation first fills up to 100% which calls this method
+    // so we need to only look for when it reaches 0
+    if (fillCounter > 0) {
+      onTimeUp();
+    } else {
+      setFillCounter(counter => counter + 1);
+    }
+  }, [fillCounter, onTimeUp]);
+
   return (
     <View style={styles.container}>
       <AnimatedCircularProgress
         ref={circleRef}
         size={70}
         width={3}
-        fill={fill}
+        fill={100}
+        prefill={100}
         tintColor={colors.secondary}
         backgroundColor={colors.primary}
         rotation={180}
-        onAnimationComplete={onTimeUp}
+        onAnimationComplete={onAnimationDone}
       >
         {(fill) => (
           <Text style={[styles.text, { color: colors.text }]}>{Math.round(timeInSeconds * (fill / 100))}</Text>
