@@ -7,7 +7,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useTimer } from "use-timer";
-import { NavigationPropList, NavigationScreens, Workout } from "../../models";
+import { NavigationPropList, NavigationScreens } from "../../models";
 import { getElapsedTime, getNextSetDescription, getRemainingSetsDescription } from "./util";
 import WorkoutLayout from "./workout.layout";
 import { WorkoutProps } from ".";

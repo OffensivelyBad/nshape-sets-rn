@@ -1,11 +1,11 @@
 import React from "react";
 import { text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react-native";
-import ActiveWorkoutLayout from "./active-workout.layout";
+import LeaderboardLayout from "./leaderboard.layout";
 
 storiesOf("UI", module)
 .addDecorator(withKnobs)
-.add("Active Workout", () => {
+.add("Leaderboard", () => {
 const sample = text("Test Label", "default");
-return <ActiveWorkoutLayout />;
+return <LeaderboardLayout />;
 });

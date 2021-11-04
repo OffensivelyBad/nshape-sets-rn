@@ -12,8 +12,8 @@ export type ColorTheme = {
 export const LightColor: ColorTheme = {
   backgroundTop: '#E53655',
   backgroundBottom: '#413AA0',
-  text: 'black',
-  inputText: 'white',
+  text: '#fff',
+  inputText: '#fff',
   primary: '#E53655',
   secondary: '#413AA0'
 };
@@ -21,8 +21,8 @@ export const LightColor: ColorTheme = {
 export const DarkColor: ColorTheme = {
   backgroundTop: '#413AA0',
   backgroundBottom: '#000',
-  text: 'white',
-  inputText: 'white',
+  text: '#fff',
+  inputText: '#fff',
   primary: '#413AA0',
   secondary: '#E53655'
 };

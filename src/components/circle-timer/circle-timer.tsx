@@ -5,7 +5,7 @@
 */
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, View, Platform } from "react-native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { useColorStore } from "../../stores";
 import styles from "./styles";
@@ -19,7 +19,8 @@ type Props = {
 const CircleTimer = ({ timeInSeconds, startCountdown = true, onCountdownComplete }: Props) => {
   const { colors } = useColorStore();
   const circleRef = useRef<AnimatedCircularProgress>();
-  const [fillCounter, setFillCounter] = useState(0);
+  const initialFillCounter = Platform.OS === "android" ? 1 : 0;
+  const [fillCounter, setFillCounter] = useState(initialFillCounter);
 
   useEffect(() => {
     if (startCountdown) {

@@ -30,18 +30,20 @@
 
 [ ] add rest component
 
-[ ] add logo
+[x] add logo
 
-[ ] add alert
+[x] add alert
 
 [x] add slider
 
 [x] add sliderinput component
 
-[ ] add button component
+[x] add button component
 
-[ ] add detail component
+[x] add detail component
 
-[ ] add timer component
+[x] add timer component
 
 [ ] add aliasing for paths
+
+[ ] firebase support (leaderboard, login)
