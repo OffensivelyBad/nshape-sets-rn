@@ -46,7 +46,7 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
       text: "Keep going!",
       style: "default"
     }
-    Alert.alert("Are you done?", undefined, [doneButton, continueButton]);
+    Alert.alert("Are you done?", undefined, [continueButton, doneButton]);
   }, [navigation]);
 
   const onWorkoutEnd = useCallback(() => {
