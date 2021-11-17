@@ -19,7 +19,7 @@ type Props = {
 const CircleTimer = ({ timeInSeconds, startCountdown = true, onCountdownComplete }: Props) => {
   const { colors } = useColorStore();
   const circleRef = useRef<AnimatedCircularProgress>();
-  const initialFillCounter = Platform.OS === "android" ? 1 : 0;
+  const initialFillCounter = Platform.OS === "android" ? 0 : 0;
   const [fillCounter, setFillCounter] = useState(initialFillCounter);
 
   useEffect(() => {

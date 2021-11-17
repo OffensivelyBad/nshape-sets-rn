@@ -7,24 +7,24 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useCallback, useState } from "react";
 import { NavigationScreens, Workout } from "../../models";
+import { useWorkoutStore } from "../../stores";
 import MainLayout from "./main.layout";
 
 type Props = {};
 
 const MainLogic = (_props: Props) => {
   const { navigate } = useNavigation();
-  const [setsValue, setSetsValue] = useState(5);
-  const [restValue, setRestValue] = useState(6);
+  const { workout: { sets, rest }, setWorkout } = useWorkoutStore();
+  const [setsValue, setSetsValue] = useState(sets);
+  const [restValue, setRestValue] = useState(rest);
 
   const startWorkout = useCallback(() => {
-    /*
-      create a workout model
-      present the workout screen passing in the workout model
-    */
     const workout: Workout = {
       sets: setsValue,
       rest: restValue
-    }
+    };
+
+    setWorkout(workout);
     navigate(NavigationScreens.Workout, { workout });
   }, [setsValue, restValue, navigate]);
 
