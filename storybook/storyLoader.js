@@ -11,7 +11,7 @@ function loadStories() {
   require('../src/components/slider-input/slider-input.stories');
   require('../src/components/timer/timer.stories');
   require('../src/screens/leaderboard/leaderboard.stories');
-  require('../src/screens/main/main.stories');
+  require('../src/screens/setup/setup.stories');
   require('../src/screens/workout/workout.stories');
 }
 
@@ -23,7 +23,7 @@ const stories = [
   '../src/components/slider-input/slider-input.stories',
   '../src/components/timer/timer.stories',
   '../src/screens/leaderboard/leaderboard.stories',
-  '../src/screens/main/main.stories',
+  '../src/screens/setup/setup.stories',
   '../src/screens/workout/workout.stories',
 ];
 

@@ -1,12 +1,12 @@
 import React from "react";
-import { number, withKnobs } from "@storybook/addon-knobs";
+import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react-native";
-import MainLayout from "./main.layout";
+import SetupLayout from "./setup.layout";
 
 storiesOf("UI", module)
   .addDecorator(withKnobs)
   .add("Main", () => {
-    return <MainLayout
+    return <SetupLayout
       setsValue={5}
       onNewSets={() => { }}
       restValue={60}

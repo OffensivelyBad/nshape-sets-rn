@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/core";
 import React, { useCallback, useState } from "react";
 import { NavigationScreens, Workout } from "../../models";
 import { useWorkoutStore } from "../../stores";
-import MainLayout from "./main.layout";
+import SetupLayout from "./setup.layout";
 
 type Props = {};
 
@@ -26,10 +26,10 @@ const MainLogic = (_props: Props) => {
 
     setWorkout(workout);
     navigate(NavigationScreens.Workout, { workout });
-  }, [setsValue, restValue, navigate]);
+  }, [setsValue, restValue, setWorkout, navigate]);
 
   return (
-    <MainLayout
+    <SetupLayout
       setsValue={setsValue}
       onNewSets={setSetsValue}
       restValue={restValue}
