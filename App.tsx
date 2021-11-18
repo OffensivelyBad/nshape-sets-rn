@@ -22,7 +22,7 @@ import { DarkColor, LightColor } from './src/theme';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const { setColors } = useColorStore();
+  const { setColors, colors } = useColorStore();
 
   useEffect(() => {
     setColors(isDarkMode ? DarkColor : LightColor);
@@ -31,7 +31,10 @@ const App = () => {
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <StatusBar
+          backgroundColor={colors.backgroundTop}
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        />
         <Main />
       </View>
     </NavigationContainer>
