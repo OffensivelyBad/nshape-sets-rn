@@ -5,7 +5,8 @@
 */
 
 import { useNavigation } from "@react-navigation/core";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import Base from "../../components/base";
 import { NavigationScreens, Workout } from "../../models";
 import { useWorkoutStore } from "../../stores";
 import SetupLayout from "./setup.layout";
@@ -14,9 +15,19 @@ type Props = {};
 
 const MainLogic = (_props: Props) => {
   const { navigate } = useNavigation();
-  const { workout: { sets, rest }, setWorkout } = useWorkoutStore();
-  const [setsValue, setSetsValue] = useState(sets);
-  const [restValue, setRestValue] = useState(rest);
+  const { workout, setWorkout, hydrated } = useWorkoutStore();
+  const [setsValue, setSetsValue] = useState(0);
+  const [restValue, setRestValue] = useState(0);
+
+  useEffect(() => {
+    if (hydrated) {
+      if (workout) {
+        const { sets, rest } = workout;
+        setSetsValue(sets);
+        setRestValue(rest);
+      }
+    }
+  }, [hydrated, workout]);
 
   const startWorkout = useCallback(() => {
     const workout: Workout = {
@@ -27,6 +38,10 @@ const MainLogic = (_props: Props) => {
     setWorkout(workout);
     navigate(NavigationScreens.Workout, { workout });
   }, [setsValue, restValue, setWorkout, navigate]);
+
+  if (setsValue === 0) {
+    return <Base />
+  }
 
   return (
     <SetupLayout

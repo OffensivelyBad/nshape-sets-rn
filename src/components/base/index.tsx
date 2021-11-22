@@ -9,7 +9,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useColorStore } from "../../stores";
 
 type Props = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 const Base = ({ children }: Props) => {

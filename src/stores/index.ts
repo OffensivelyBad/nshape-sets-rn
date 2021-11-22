@@ -27,7 +27,7 @@ export const useColorStore = create<colorStore>(
 );
 
 type workoutStore = {
-  workout: Workout;
+  workout?: Workout;
   setWorkout: (workout: Workout) => void;
   hydrated: boolean;
   setHydrated: () => void;
@@ -36,7 +36,6 @@ type workoutStore = {
 export const useWorkoutStore = create<workoutStore>(
   persist(
     set => ({
-      workout: WorkoutExample,
       setWorkout: (workout: Workout) => {
         set(state => {
           return { ...state, workout }
