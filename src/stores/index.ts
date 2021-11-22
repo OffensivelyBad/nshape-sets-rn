@@ -29,6 +29,8 @@ export const useColorStore = create<colorStore>(
 type workoutStore = {
   workout: Workout;
   setWorkout: (workout: Workout) => void;
+  hydrated: boolean;
+  setHydrated: () => void;
 }
 
 export const useWorkoutStore = create<workoutStore>(
@@ -39,11 +41,19 @@ export const useWorkoutStore = create<workoutStore>(
         set(state => {
           return { ...state, workout }
         })
-      }
+      },
+      hydrated: false,
+      setHydrated: () => set({ hydrated: true })
     }),
     {
       name: "workout",
-      getStorage: () => AsyncStorage
+      getStorage: () => AsyncStorage,
+      onRehydrateStorage: () => (state, error) => {
+        console.log(state)
+        if (state) {
+          state.setHydrated();
+        }
+      }
     }
   )
 );

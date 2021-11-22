@@ -12,17 +12,17 @@ export type ColorTheme = {
 export const LightColor: ColorTheme = {
   backgroundTop: '#E53655',
   backgroundBottom: '#413AA0',
-  text: '#fff',
-  inputText: '#fff',
+  text: '#ffffff',
+  inputText: '#ffffff',
   primary: '#E53655',
   secondary: '#413AA0'
 };
 
 export const DarkColor: ColorTheme = {
   backgroundTop: '#413AA0',
-  backgroundBottom: '#000',
-  text: '#fff',
-  inputText: '#fff',
+  backgroundBottom: '#000000',
+  text: '#ffffff',
+  inputText: '#ffffff',
   primary: '#413AA0',
   secondary: '#E53655'
 };

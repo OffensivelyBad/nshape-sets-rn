@@ -1,4 +1,4 @@
-import {IOSNotificationCategory} from '@notifee/react-native';
+import { IOSNotificationCategory } from '@notifee/react-native';
 
 export const categories: IOSNotificationCategory[] = [
   {
@@ -6,7 +6,7 @@ export const categories: IOSNotificationCategory[] = [
     actions: [
       {
         id: 'first_action_reply',
-        title: 'Reply, Open & Cancel',
+        title: 'Open',
         input: true,
       },
       {
