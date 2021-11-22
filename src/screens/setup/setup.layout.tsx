@@ -20,7 +20,7 @@ type Props = {
   onStartPressed: () => void;
 };
 
-const MainLayout = ({ setsValue, onNewSets, restValue, onNewRest, onStartPressed }: Props) => {
+const SetupLayout = ({ setsValue, onNewSets, restValue, onNewRest, onStartPressed }: Props) => {
   return (
     <Base>
       <ScrollView
@@ -55,4 +55,4 @@ const MainLayout = ({ setsValue, onNewSets, restValue, onNewRest, onStartPressed
   );
 };
 
-export default MainLayout;
+export default SetupLayout;

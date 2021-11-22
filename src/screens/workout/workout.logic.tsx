@@ -13,6 +13,7 @@ import WorkoutLayout from "./workout.layout";
 import { WorkoutProps } from ".";
 import { Alert, AlertButton } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import { triggerNotification } from '../../utils/notifications';
 
 type WorkoutNavigationProps = StackNavigationProp<NavigationPropList, NavigationScreens.Workout>;
 
@@ -31,6 +32,12 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
     start()
   }, [start]);
 
+  useEffect(() => {
+    if (resting) {
+      triggerNotification("Next round!", `Go! You're on Set #${currentSet + 1}`, rest + 1);
+    }
+  }, [resting, rest, currentSet]);
+
   const onRestEnd = useCallback(() => {
     setResting(false);
     setCurrentSet(set => set + 1);
@@ -46,7 +53,7 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
       text: "Keep going!",
       style: "default"
     }
-    Alert.alert("Are you done?", undefined, [doneButton, continueButton]);
+    Alert.alert("Are you done?", undefined, [continueButton, doneButton]);
   }, [navigation]);
 
   const onWorkoutEnd = useCallback(() => {
@@ -57,7 +64,7 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
       onPress: () => navigation.goBack()
     }
     Alert.alert("Done!", `You completed all sets in ${formattedTime}.`, [button]);
-  }, [navigation, pause, time]);
+  }, [pause, time, navigation]);
 
   const onSetEnd = useCallback(() => {
     if (currentSet >= sets) {

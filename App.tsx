@@ -6,66 +6,40 @@
  * @flow strict-local
  */
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
-  Pressable,
   StatusBar,
   StyleSheet,
   useColorScheme,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
-
-import Storybook from './storybook'
 import Main from './src/screens/main';
-
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useColorStore } from './src/stores';
 import { DarkColor, LightColor } from './src/theme';
-import Workout from './src/screens/workout';
-import { NavigationPropList, NavigationScreens } from './src/models';
-
-const Stack = createNativeStackNavigator<NavigationPropList>();
+import { requestUserPermission } from './src/utils/notifications';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const { setColors } = useColorStore();
-  const [storybook, setStorybook] = useState(false);
+  const { setColors, colors } = useColorStore();
 
   useEffect(() => {
     setColors(isDarkMode ? DarkColor : LightColor);
   }, [isDarkMode, setColors]);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const toggleStorybook = useCallback(() => {
-    setStorybook(value => !value);
-  }, [setStorybook]);
+  useEffect(() => {
+    requestUserPermission();
+  }, []);
 
   return (
     <NavigationContainer>
-      <View style={[styles.container, backgroundStyle]}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <View style={styles.container}>
-          {storybook ?
-            <Storybook /> :
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false
-              }}
-            >
-              <Stack.Screen name={NavigationScreens.Main} component={Main} />
-              <Stack.Screen name={NavigationScreens.Workout} component={Workout} />
-            </Stack.Navigator>
-          }
-          <Pressable onPress={toggleStorybook} style={styles.hiddenButton} />
-        </View>
+      <View style={styles.container}>
+        <StatusBar
+          backgroundColor={colors.backgroundTop}
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        />
+        <Main />
       </View>
     </NavigationContainer>
   );

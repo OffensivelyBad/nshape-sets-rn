@@ -5,7 +5,7 @@
 */
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Text, View, Platform } from "react-native";
+import { Text, View } from "react-native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { useColorStore } from "../../stores";
 import styles from "./styles";
@@ -19,12 +19,12 @@ type Props = {
 const CircleTimer = ({ timeInSeconds, startCountdown = true, onCountdownComplete }: Props) => {
   const { colors } = useColorStore();
   const circleRef = useRef<AnimatedCircularProgress>();
-  const initialFillCounter = Platform.OS === "android" ? 1 : 0;
-  const [fillCounter, setFillCounter] = useState(initialFillCounter);
+  const [callTimeUp, setCallTimeUp] = useState(false);
 
   useEffect(() => {
     if (startCountdown) {
       setTimeout(() => {
+        setCallTimeUp(true);
         const toValue = startCountdown ? 0 : 100;
         circleRef?.current?.animate(
           toValue,
@@ -40,14 +40,10 @@ const CircleTimer = ({ timeInSeconds, startCountdown = true, onCountdownComplete
   }, [onCountdownComplete]);
 
   const onAnimationDone = useCallback(() => {
-    // The animation first fills up to 100% which calls this method
-    // so we need to only look for when it reaches 0
-    if (fillCounter > 0) {
+    if (callTimeUp) {
       onTimeUp();
-    } else {
-      setFillCounter(counter => counter + 1);
     }
-  }, [fillCounter, onTimeUp]);
+  }, [callTimeUp, onTimeUp]);
 
   return (
     <View style={styles.container}>

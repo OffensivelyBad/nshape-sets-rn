@@ -1,12 +1,12 @@
 import { WorkoutProps } from '../screens/workout';
 
 export enum NavigationScreens {
-  Main = 'Main',
-  Workout = 'Workout'
+  Setup = 'Setup',
+  Workout = 'Workout',
 }
 
 export type NavigationPropList = {
-  Main: {};
+  Setup: undefined;
   Workout: WorkoutProps;
 };
 
