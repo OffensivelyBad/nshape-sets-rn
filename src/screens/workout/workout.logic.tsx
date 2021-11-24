@@ -34,7 +34,7 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
 
   useEffect(() => {
     if (resting) {
-      triggerNotification("Next round!", `Go! You're on Set #${currentSet + 1}`, rest + 1);
+      triggerNotification("Next round! - NShape Sets", `Go! You're on Set #${currentSet + 1}`, rest + 1);
     }
   }, [resting, rest, currentSet]);
 

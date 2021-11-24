@@ -150,12 +150,12 @@ export const setupForegroundEventHandling = async () => {
           detail.pressAction,
         );
 
-        if (detail.pressAction?.id === 'first_action_reply') {
-          // perform any server calls here and cancel notification
-          if (notification?.id) {
-            await notifee.cancelDisplayedNotification(notification.id);
-          }
-        }
+        // if (detail.pressAction?.id === 'first_action_reply') {
+        //   // perform any server calls here and cancel notification
+        //   if (notification?.id) {
+        //     await notifee.cancelDisplayedNotification(notification.id);
+        //   }
+        // }
         break;
     }
   });
@@ -168,16 +168,16 @@ export const setupBackgroundEventHandling = async () => {
       `[onBackgroundEvent] notification id: ${notification?.id},  event type: ${EventType[type]}, press action: ${pressAction?.id}`,
     );
     // Check if the user pressed the "Mark as read" action
-    if (
-      type === EventType.ACTION_PRESS &&
-      pressAction?.id === 'first_action_reply'
-    ) {
-      console.log('[onBackgroundEvent] ACTION_PRESS: first_action_reply');
+    // if (
+    //   type === EventType.ACTION_PRESS &&
+    //   pressAction?.id === 'first_action_reply'
+    // ) {
+    //   console.log('[onBackgroundEvent] ACTION_PRESS: first_action_reply');
 
-      // Remove the notification
-      if (notification?.id) {
-        await notifee.cancelNotification(notification?.id);
-      }
-    }
+    //   // Remove the notification
+    //   if (notification?.id) {
+    //     await notifee.cancelNotification(notification?.id);
+    //   }
+    // }
   });
 }

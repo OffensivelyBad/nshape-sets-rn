@@ -18,7 +18,7 @@ import Main from './src/screens/main';
 import { NavigationContainer } from '@react-navigation/native';
 import { useColorStore } from './src/stores';
 import { DarkColor, LightColor } from './src/theme';
-import { requestUserPermission } from './src/utils/notifications';
+import { requestUserPermission, checkAndAlertForBattery, setupForegroundEventHandling, setupBackgroundEventHandling } from './src/utils/notifications';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -29,7 +29,11 @@ const App = () => {
   }, [isDarkMode, setColors]);
 
   useEffect(() => {
+    // notifications
     requestUserPermission();
+    setupBackgroundEventHandling();
+    setupForegroundEventHandling();
+    checkAndAlertForBattery();
   }, []);
 
   return (
