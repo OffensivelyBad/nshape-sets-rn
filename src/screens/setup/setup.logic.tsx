@@ -6,8 +6,9 @@
 
 import { useNavigation } from "@react-navigation/core";
 import React, { useCallback, useEffect, useState } from "react";
+import { Text } from "react-native";
 import Base from "../../components/base";
-import { NavigationScreens, Workout } from "../../models";
+import { NavigationScreens, Workout, WorkoutExample } from "../../models";
 import { useWorkoutStore } from "../../stores";
 import SetupLayout from "./setup.layout";
 
@@ -23,6 +24,10 @@ const MainLogic = (_props: Props) => {
     if (hydrated) {
       if (workout) {
         const { sets, rest } = workout;
+        setSetsValue(sets);
+        setRestValue(rest);
+      } else {
+        const { sets, rest } = WorkoutExample;
         setSetsValue(sets);
         setRestValue(rest);
       }
