@@ -6,7 +6,6 @@
 
 import { useNavigation } from "@react-navigation/core";
 import React, { useCallback, useEffect, useState } from "react";
-import { Text } from "react-native";
 import Base from "../../components/base";
 import { NavigationScreens, Workout, WorkoutExample } from "../../models";
 import { useWorkoutStore } from "../../stores";
