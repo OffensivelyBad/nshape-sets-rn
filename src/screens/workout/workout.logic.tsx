@@ -78,6 +78,7 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
   return <WorkoutLayout
     currentSet={currentSet}
     remainingSetsDescription={getRemainingSetsDescription(currentSet, sets)}
+    totalSets={sets}
     nextSetsDescription={getNextSetDescription(currentSet, sets)}
     elapsedTime={getElapsedTime(time)}
     restSeconds={rest}

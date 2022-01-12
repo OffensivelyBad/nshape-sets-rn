@@ -17,6 +17,7 @@ import styles from "./styles";
 
 type Props = {
   currentSet: number;
+  totalSets: number;
   remainingSetsDescription: string;
   nextSetsDescription: string;
   elapsedTime: string;
@@ -29,6 +30,7 @@ type Props = {
 
 const WorkoutLayout = ({
   currentSet,
+  totalSets,
   remainingSetsDescription,
   nextSetsDescription,
   elapsedTime,
@@ -53,6 +55,7 @@ const WorkoutLayout = ({
           /> :
           <Active
             currentSet={currentSet}
+            totalSets={totalSets}
             remainingSetsDescription={remainingSetsDescription}
             onSetEnd={onSetEnd}
           />

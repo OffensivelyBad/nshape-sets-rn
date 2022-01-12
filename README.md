@@ -17,3 +17,7 @@ Open `android/app/build.gradle` and set the `android.defaultConfig.versionCode` 
 From the project root, run `yarn android:build`.  The Android App Bundle will be in `android/app/build/outputs/bundle/release/app-release.aab`.
 
 You can upload this to the [Google Play Console](https://play.google.com/console).
+
+## FONTS
+
+Fonts for the buttons and other imagery were created from [Textcraft](https://textcraft.net) using `Minstrel` with a 2 pixel outline.

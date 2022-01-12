@@ -12,15 +12,18 @@ import styles from "./styles";
 
 type Props = {
   currentSet: number;
+  totalSets: number;
   remainingSetsDescription: string;
   onSetEnd: () => void;
 };
 
 const Active = ({
   currentSet,
+  totalSets,
   remainingSetsDescription,
   onSetEnd
 }: Props) => {
+  const restButton = currentSet === totalSets ? require('../../../assets/Button-Done.png') : require('../../../assets/Button-Rest.png');
   return (
     <View style={styles.container}>
       <Detail
@@ -32,7 +35,7 @@ const Active = ({
         value={remainingSetsDescription}
       />
       <Button
-        image={require('../../../assets/Button-Rest.png')}
+        image={restButton}
         onPress={onSetEnd}
       />
     </View>
