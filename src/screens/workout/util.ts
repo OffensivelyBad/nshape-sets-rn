@@ -14,3 +14,10 @@ export const getElapsedTime = (timeInSeconds: number): string => {
   const time = `${minutes}:${seconds}`;
   return time;
 };
+
+export const getTimeElapsedFromStart = (startDate: Date): string => {
+  const currentDate = new Date();
+  const elapsedSeconds = currentDate.getTime() - startDate.getTime()
+  const time = getElapsedTime(elapsedSeconds);
+  return time;
+};

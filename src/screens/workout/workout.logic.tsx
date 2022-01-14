@@ -8,7 +8,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useTimer } from "use-timer";
 import { NavigationPropList, NavigationScreens } from "../../models";
-import { getElapsedTime, getNextSetDescription, getRemainingSetsDescription } from "./util";
+import { getElapsedTime, getTimeElapsedFromStart, getNextSetDescription, getRemainingSetsDescription } from "./util";
 import WorkoutLayout from "./workout.layout";
 import { WorkoutProps } from ".";
 import { Alert, AlertButton } from "react-native";
@@ -24,9 +24,16 @@ type Props = {
 
 const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props) => {
   const navigation = useNavigation();
+  const startDate = new Date();
+  const [elapsedTime, setElapsedTime] = useState(0);
   const { start, pause, time } = useTimer();
   const [currentSet, setCurrentSet] = useState(1);
   const [resting, setResting] = useState(false);
+
+  useEffect(() => {
+    const time = getTimeElapsedFromStart(startDate);
+    setElapsedTime(time);
+  }, [time, startDate, getTimeElapsedFromStart]);
 
   useEffect(() => {
     start()
@@ -58,13 +65,13 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
 
   const onWorkoutEnd = useCallback(() => {
     pause();
-    const formattedTime = getElapsedTime(time);
+    const formattedTime = getTimeElapsedFromStart(startDate);
     const button: AlertButton = {
       text: "Done!",
       onPress: () => navigation.goBack()
     }
     Alert.alert("Done!", `You completed all sets in ${formattedTime}.`, [button]);
-  }, [pause, time, navigation]);
+  }, [pause, navigation, startDate]);
 
   const onSetEnd = useCallback(() => {
     if (currentSet >= sets) {
@@ -80,7 +87,7 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
     remainingSetsDescription={getRemainingSetsDescription(currentSet, sets)}
     totalSets={sets}
     nextSetsDescription={getNextSetDescription(currentSet, sets)}
-    elapsedTime={getElapsedTime(time)}
+    elapsedTime={elapsedTime}
     restSeconds={rest}
     resting={resting}
     onRestEnd={onRestEnd}
