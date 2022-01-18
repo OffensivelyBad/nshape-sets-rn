@@ -7,6 +7,7 @@ import notifee, {
   IOSAuthorizationStatus,
   EventType,
   AndroidStyle,
+  cancelTriggerNotifications
 } from '@notifee/react-native';
 import { Alert } from 'react-native';
 import { categories } from './categories';
@@ -21,6 +22,10 @@ const getTimestamp = (delay: number) => {
 const getTimestampTrigger = (delay: number): TimestampTrigger => {
   return { timestamp: getTimestamp(delay), type: TriggerType.TIMESTAMP };
 };
+
+export const cancelAllTriggerNotifications = (notificationIds?: string[]) => {
+  cancelTriggerNotifications(notificationIds);
+}
 
 export const triggerNotification = async (title: string, body: string, delay: number) => {
   const notification: Notification = {
