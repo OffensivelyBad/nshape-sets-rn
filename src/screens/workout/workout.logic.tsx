@@ -8,7 +8,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useTimer } from "use-timer";
 import { NavigationPropList, NavigationScreens } from "../../models";
-import { getElapsedTime, getTimeElapsedFromStart, getNextSetDescription, getRemainingSetsDescription } from "./util";
+import { getTimeElapsedFromStart, getNextSetDescription, getRemainingSetsDescription } from "./util";
 import WorkoutLayout from "./workout.layout";
 import { WorkoutProps } from ".";
 import { Alert, AlertButton } from "react-native";
@@ -24,8 +24,8 @@ type Props = {
 
 const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props) => {
   const navigation = useNavigation();
-  const startDate = new Date();
-  const [elapsedTime, setElapsedTime] = useState(0);
+  const [startDate] = useState(new Date());
+  const [elapsedTime, setElapsedTime] = useState('00:00');
   const { start, pause, time } = useTimer();
   const [currentSet, setCurrentSet] = useState(1);
   const [resting, setResting] = useState(false);
@@ -33,7 +33,7 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
   useEffect(() => {
     const time = getTimeElapsedFromStart(startDate);
     setElapsedTime(time);
-  }, [time, startDate, getTimeElapsedFromStart]);
+  }, [time, startDate]);
 
   useEffect(() => {
     start()
@@ -48,15 +48,18 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
   const onRestEnd = useCallback(() => {
     setResting(false);
     setCurrentSet(set => set + 1);
+    cancelAllTriggerNotifications();
   }, []);
+
+  const backToSetup = useCallback(() => {
+    cancelAllTriggerNotifications();
+    navigation.goBack();
+  }, [navigation]);
 
   const onBackPressed = useCallback(() => {
     const doneButton: AlertButton = {
       text: "Done!",
-      onPress: () => {
-        cancelAllTriggerNotifications();
-        navigation.goBack();
-      },
+      onPress: () => backToSetup(),
       style: "destructive"
     }
     const continueButton: AlertButton = {
@@ -64,17 +67,17 @@ const WorkoutLogic = ({ route: { params: { workout: { rest, sets } } } }: Props)
       style: "default"
     }
     Alert.alert("Are you done?", undefined, [continueButton, doneButton]);
-  }, [navigation]);
+  }, [backToSetup]);
 
   const onWorkoutEnd = useCallback(() => {
     pause();
     const formattedTime = getTimeElapsedFromStart(startDate);
     const button: AlertButton = {
       text: "Done!",
-      onPress: () => navigation.goBack()
+      onPress: () => backToSetup(),
     }
     Alert.alert("Done!", `You completed all sets in ${formattedTime}.`, [button]);
-  }, [pause, navigation, startDate]);
+  }, [backToSetup, pause, startDate]);
 
   const onSetEnd = useCallback(() => {
     if (currentSet >= sets) {

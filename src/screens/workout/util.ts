@@ -17,7 +17,7 @@ export const getElapsedTime = (timeInSeconds: number): string => {
 
 export const getTimeElapsedFromStart = (startDate: Date): string => {
   const currentDate = new Date();
-  const elapsedSeconds = currentDate.getTime() - startDate.getTime()
-  const time = getElapsedTime(elapsedSeconds);
+  const elapsedSeconds = (currentDate.getTime() - startDate.getTime()) / 1000
+  const time = getElapsedTime(Math.round(elapsedSeconds));
   return time;
 };
